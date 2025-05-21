@@ -133,13 +133,13 @@ export const bookTicket = async (passengers) => {
   }
 };
 
-export const cancelTicket = async (ticketId) => {
+export const cancelTicket = async (pnr) => {
   const connection = await getConnection();
 
   try {
     await connection.beginTransaction();
-
-    const ticket = await ticketModel.getTicketById(ticketId);
+    const ticket = await ticketModel.getTicketByPNR(pnr);
+    const ticketId = ticket.id;
     if (!ticket) throw new Error('Ticket not found');
     if (ticket.status === TICKET_STATUS.CANCELLED) throw new Error('Ticket is already cancelled');
 

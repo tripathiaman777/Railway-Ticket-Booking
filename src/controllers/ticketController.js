@@ -30,11 +30,11 @@ export const bookTicket = async (req, res) => {
 };
 
 export const cancelTicketValidation = [
-  param('ticketId')
-    .isInt({ min: 1 })
-    .withMessage('Invalid ticket ID')
+  param('pnr')
+    .isString()
+    .isLength({ min: 1, max: 20 })
+    .withMessage('PNR must be a string of max length 20')
 ];
-
 export const cancelTicket = async (req, res) => {
   try {
     const errors = validationResult(req);
@@ -42,8 +42,9 @@ export const cancelTicket = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { ticketId } = req.params;
-    const result = await ticketService.cancelTicket(ticketId);
+    const { pnr } = req.params;
+    console.log('Cancelling ticket request:', pnr);
+    const result = await ticketService.cancelTicket(pnr);
     
     return res.status(200).json(result);
   } catch (error) {

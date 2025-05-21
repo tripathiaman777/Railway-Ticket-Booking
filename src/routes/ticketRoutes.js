@@ -47,7 +47,7 @@ router.post(
 // Cancel a ticket
 /**
  * @swagger
- * /api/v1/ticket/cancel/{ticketId}:
+ * /api/v1/ticket/cancel/{pnr}:
  *   post:
  *     summary: Cancel a ticket by ticketId
  *     parameters:
@@ -56,7 +56,7 @@ router.post(
  *         required: true
  *         schema:
  *           type: integer
- *         description: The ID of the ticket to cancel
+ *         description: The PNR of the ticket to cancel
  *     responses:
  *       200:
  *         description: Ticket cancelled successfully
@@ -64,7 +64,7 @@ router.post(
  *         description: Ticket not found or already cancelled
  */
 router.post(
-  '/cancel/:ticketId', 
+  '/cancel/:pnr', 
   ticketController.cancelTicketValidation,
   ticketController.cancelTicket
 );

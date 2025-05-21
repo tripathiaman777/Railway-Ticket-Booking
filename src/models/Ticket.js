@@ -17,7 +17,7 @@ export const updateTicketStatus = async (ticketId, status) => {
 };
 
 export const getTicketByPNR = async (pnr) => {
-  const sql = `SELECT * FROM tickets WHERE pnr = ?`;
+  const sql = `SELECT id FROM tickets WHERE pnr = ?`;
   const results = await executeQuery(sql, [pnr]);
   return results.length > 0 ? results[0] : null;
 };
