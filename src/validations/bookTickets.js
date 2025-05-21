@@ -25,9 +25,10 @@ const passengerSchema = Joi.object({
 });
 
 export const bookTicketValidation = Joi.object({
-  passengers: Joi.array().items(passengerSchema).min(1).required().messages({
+  passengers: Joi.array().items(passengerSchema).min(1).max(5).required().messages({
     'array.base': 'Passengers must be an array',
     'array.min': 'At least one passenger is required',
+    'array.max': 'A maximum of 5 passengers can be booked at once',
     'any.required': 'Passengers are required'
   })
 });
