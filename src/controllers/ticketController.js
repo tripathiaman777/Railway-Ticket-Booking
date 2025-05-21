@@ -1,34 +1,7 @@
 import { body, param, validationResult } from 'express-validator';
 import * as ticketService from '../services/ticketService.js';
 import logger from '../config/logger.js';
-import { GENDER } from '../utils/constants.js';
 
-export const bookTicketValidation = [
-  body('passengers')
-    .isArray({ min: 1 })
-    .withMessage('At least one passenger is required'),
-  body('passengers.*.name')
-    .notEmpty()
-    .withMessage('Passenger name is required')
-    .isString()
-    .withMessage('Name must be a string')
-    .isLength({ min: 3, max: 100 })
-    .withMessage('Name must be between 3 and 100 characters'),
-  body('passengers.*.age')
-    .notEmpty()
-    .withMessage('Age is required')
-    .isInt({ min: 0, max: 120 })
-    .withMessage('Age must be between 0 and 120'),
-  body('passengers.*.gender')
-    .notEmpty()
-    .withMessage('Gender is required')
-    .isIn(Object.values(GENDER))
-    .withMessage('Gender must be MALE, FEMALE, or OTHER'),
-  body('passengers.*.hasChildren')
-    .optional()
-    .isBoolean()
-    .withMessage('hasChildren must be a boolean')
-];
 
 export const bookTicket = async (req, res) => {
   try {

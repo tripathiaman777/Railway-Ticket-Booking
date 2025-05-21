@@ -1,5 +1,7 @@
 import express from 'express';
 import * as ticketController from '../controllers/ticketController.js';
+import { bookTicketValidation } from '../validations/bookTickets.js';
+import { joiValidate } from '../middlewares/joiValidate.js';
 
 const router = express.Router();
 
@@ -38,7 +40,7 @@ const router = express.Router();
  */
 router.post(
   '/book', 
-  ticketController.bookTicketValidation,
+  joiValidate(bookTicketValidation),
   ticketController.bookTicket
 );
 
